@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Imperative UI Programming</title>
+</head>
+
+<body>
+  <table style="width: 100%; padding: 10px">
+    <tr style="vertical-align: top">
+      <td style="width: 50%; padding: 10px; background-color: pink">
+        <div id="countDiv"></div>
+        <button onclick="countUp()">Count</button>
+      </td>
+      <td style="width: 50%; padding: 10px; background-color: lightskyblue">
+        <input id="todoInput" type="text">
+        <button onclick="addTodo()">Add Todo</button><br><br>
+        My Todo List:
+        <ul id="todoUl"></ul>
+      </td>
+    </tr>
+  </table>
+
+  <script>
+    let count = 0;
+    const countDiv = document.getElementById('countDiv');
+    updateCountDiv();
+
+    function updateCountDiv() {
+      countDiv.innerText = count.toString();
+    }
+
+    function countUp() {
+      count++;
+      updateCountDiv();
+    }
+
+    const todoList = [];
+    const todoInput = document.getElementById('todoInput');
+    const todoUl = document.getElementById('todoUl');
+    updateTodoUl();
+
+    function updateTodoUl() {
+      todoUl.innerHTML = '';
+
+      for (let todo of todoList) {
+        const li = document.createElement('li');
+        const text = document.createTextNode(todo);
+        li.appendChild(text);
+        todoUl.appendChild(li);
+      }
+    }
+
+    function addTodo() {
+      todoList.push(todoInput.value);
+      updateTodoUl();
+    }
+  </script>
+</body>
+</html>
